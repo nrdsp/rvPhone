@@ -7,8 +7,6 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         riscv-toolchain =
-#          (import <nixpkgs> {}).pkgsCross.riscv32;
-#          (import <nixpkgs> {}).pkgsCross.riscv64;
           import nixpkgs {
             localSystem = "${system}";
             crossSystem = {
@@ -50,8 +48,6 @@
               buildInputs = with pkgs; [
                 riscv-toolchain.buildPackages.gcc
                 riscv-toolchain.buildPackages.binutils.bintools
-                openocd
-                mkspiffs-presets.esp-idf
               ];
               shellHook = ''
                 RISCV_HOME=${riscv-toolchain.buildPackages.gcc}
